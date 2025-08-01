@@ -14,16 +14,211 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      organization: {
+        Row: {
+          created_at: string
+          id: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+        }
+        Relationships: []
+      }
+      organizations: {
+        Row: {
+          address: Json | null
+          created_at: string
+          description: string | null
+          email: string | null
+          id: string
+          is_active: boolean
+          name: string
+          phone: string | null
+          settings: Json | null
+          type: Database["public"]["Enums"]["organization_type"]
+          updated_at: string
+        }
+        Insert: {
+          address?: Json | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          phone?: string | null
+          settings?: Json | null
+          type?: Database["public"]["Enums"]["organization_type"]
+          updated_at?: string
+        }
+        Update: {
+          address?: Json | null
+          created_at?: string
+          description?: string | null
+          email?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          phone?: string | null
+          settings?: Json | null
+          type?: Database["public"]["Enums"]["organization_type"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          department: string | null
+          email: string
+          employee_id: string | null
+          first_name: string | null
+          id: string
+          is_active: boolean
+          last_name: string | null
+          organization_id: string | null
+          phone: string | null
+          position: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          department?: string | null
+          email: string
+          employee_id?: string | null
+          first_name?: string | null
+          id?: string
+          is_active?: boolean
+          last_name?: string | null
+          organization_id?: string | null
+          phone?: string | null
+          position?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          department?: string | null
+          email?: string
+          employee_id?: string | null
+          first_name?: string | null
+          id?: string
+          is_active?: boolean
+          last_name?: string | null
+          organization_id?: string | null
+          phone?: string | null
+          position?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          expires_at: string | null
+          granted_at: string
+          granted_by: string | null
+          id: string
+          is_active: boolean
+          module_permissions:
+            | Database["public"]["Enums"]["module_name"][]
+            | null
+          organization_id: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          user_id: string
+        }
+        Insert: {
+          expires_at?: string | null
+          granted_at?: string
+          granted_by?: string | null
+          id?: string
+          is_active?: boolean
+          module_permissions?:
+            | Database["public"]["Enums"]["module_name"][]
+            | null
+          organization_id?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id: string
+        }
+        Update: {
+          expires_at?: string | null
+          granted_at?: string
+          granted_by?: string | null
+          id?: string
+          is_active?: boolean
+          module_permissions?:
+            | Database["public"]["Enums"]["module_name"][]
+            | null
+          organization_id?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_roles_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_current_user_role: {
+        Args: { org_id?: string }
+        Returns: Database["public"]["Enums"]["user_role"]
+      }
+      has_module_access: {
+        Args: {
+          module: Database["public"]["Enums"]["module_name"]
+          org_id?: string
+        }
+        Returns: boolean
+      }
+      has_role: {
+        Args: {
+          required_role: Database["public"]["Enums"]["user_role"]
+          org_id?: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      module_name:
+        | "finance"
+        | "procurement"
+        | "stores"
+        | "hrm"
+        | "payroll"
+        | "admin"
+      organization_type:
+        | "enterprise"
+        | "sme"
+        | "startup"
+        | "non_profit"
+        | "government"
+      user_role: "super_admin" | "admin" | "manager" | "employee" | "viewer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +345,23 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      module_name: [
+        "finance",
+        "procurement",
+        "stores",
+        "hrm",
+        "payroll",
+        "admin",
+      ],
+      organization_type: [
+        "enterprise",
+        "sme",
+        "startup",
+        "non_profit",
+        "government",
+      ],
+      user_role: ["super_admin", "admin", "manager", "employee", "viewer"],
+    },
   },
 } as const
