@@ -9,6 +9,7 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Finance from "./pages/Finance";
 import Procurement from "./pages/Procurement";
+import HRM from "./pages/HRM";
 import DashboardLayout from "./components/layout/DashboardLayout";
 import NotFound from "./pages/NotFound";
 
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
             <Route path="/finance" element={<DashboardLayout><Finance /></DashboardLayout>} />
             <Route path="/procurement" element={<DashboardLayout><Procurement /></DashboardLayout>} />
+            <Route path="/hrm" element={<DashboardLayout><HRM /></DashboardLayout>} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
