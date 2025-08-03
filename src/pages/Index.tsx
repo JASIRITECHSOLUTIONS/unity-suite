@@ -1,11 +1,13 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Building2, Users, Shield, Zap, Globe, ArrowRight } from 'lucide-react';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Building2, Users, Shield, Zap, Globe, ArrowRight, Info } from 'lucide-react';
 
 const Index = () => {
   const { user, loading } = useAuth();
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -57,8 +59,8 @@ const Index = () => {
             <Building2 className="h-6 w-6 text-primary" />
             <span className="font-bold text-xl">Unity Suite</span>
           </div>
-          <Button asChild>
-            <a href="/auth">Get Started</a>
+          <Button onClick={() => navigate('/auth')}>
+            Get Started
           </Button>
         </div>
       </header>
@@ -75,15 +77,57 @@ const Index = () => {
             or specific requirements. Built for Finance, Procurement, HR, Stores & Logistics.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Button size="lg" asChild>
-              <a href="/auth">
-                Start Free Trial
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
+            <Button size="lg" onClick={() => navigate('/auth')}>
+              Start Free Trial
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button variant="outline" size="lg">
-              Learn More
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="lg">
+                  <Info className="mr-2 h-4 w-4" />
+                  Learn More
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[600px]">
+                <DialogHeader>
+                  <DialogTitle>About Unity Suite</DialogTitle>
+                  <DialogDescription>
+                    Comprehensive enterprise management system
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold mb-2">Key Features:</h4>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>• Multi-organization support with role-based access control</li>
+                      <li>• Finance module for invoicing, expenses, and financial reporting</li>
+                      <li>• Procurement system for purchase orders and supplier management</li>
+                      <li>• Stores & logistics for inventory and stock management</li>
+                      <li>• Human resources management with employee onboarding</li>
+                      <li>• Real-time collaboration and notifications</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2">Security & Compliance:</h4>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>• Enterprise-grade security with row-level security</li>
+                      <li>• Audit trails and compliance reporting</li>
+                      <li>• Role-based permissions and access control</li>
+                      <li>• Data encryption and secure authentication</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2">Scalability:</h4>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li>• Modular architecture adapts to any business size</li>
+                      <li>• Cloud-native infrastructure for global access</li>
+                      <li>• API-first design for seamless integrations</li>
+                      <li>• Real-time updates and collaboration</li>
+                    </ul>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </section>
@@ -126,11 +170,9 @@ const Index = () => {
             Join enterprises worldwide who trust Unity Suite for their critical business operations.
           </p>
           <div className="mt-10">
-            <Button size="lg" asChild>
-              <a href="/auth">
-                Get Started Today
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
+            <Button size="lg" onClick={() => navigate('/auth')}>
+              Get Started Today
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>

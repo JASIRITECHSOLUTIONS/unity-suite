@@ -2,6 +2,10 @@ import { useAuth } from '@/hooks/useAuth';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { CreateInvoiceDialog } from '@/components/dialogs/CreateInvoiceDialog';
+import { CreatePurchaseOrderDialog } from '@/components/dialogs/CreatePurchaseOrderDialog';
+import { StockCheckDialog } from '@/components/dialogs/StockCheckDialog';
+import { AddEmployeeDialog } from '@/components/dialogs/AddEmployeeDialog';
 import { 
   Building2, 
   Users, 
@@ -167,42 +171,10 @@ const Dashboard = () => {
         </CardHeader>
         <CardContent>
           <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
-            {hasModuleAccess('finance') && (
-              <Button variant="outline" className="justify-start h-auto p-4">
-                <DollarSign className="mr-2 h-4 w-4" />
-                <div className="text-left">
-                  <div className="font-medium">Create Invoice</div>
-                  <div className="text-xs text-muted-foreground">Generate new invoice</div>
-                </div>
-              </Button>
-            )}
-            {hasModuleAccess('procurement') && (
-              <Button variant="outline" className="justify-start h-auto p-4">
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                <div className="text-left">
-                  <div className="font-medium">New Purchase Order</div>
-                  <div className="text-xs text-muted-foreground">Create purchase request</div>
-                </div>
-              </Button>
-            )}
-            {hasModuleAccess('stores') && (
-              <Button variant="outline" className="justify-start h-auto p-4">
-                <Package className="mr-2 h-4 w-4" />
-                <div className="text-left">
-                  <div className="font-medium">Stock Check</div>
-                  <div className="text-xs text-muted-foreground">View inventory levels</div>
-                </div>
-              </Button>
-            )}
-            {hasModuleAccess('hrm') && (
-              <Button variant="outline" className="justify-start h-auto p-4">
-                <Users className="mr-2 h-4 w-4" />
-                <div className="text-left">
-                  <div className="font-medium">Add Employee</div>
-                  <div className="text-xs text-muted-foreground">Onboard new team member</div>
-                </div>
-              </Button>
-            )}
+            {hasModuleAccess('finance') && <CreateInvoiceDialog />}
+            {hasModuleAccess('procurement') && <CreatePurchaseOrderDialog />}
+            {hasModuleAccess('stores') && <StockCheckDialog />}
+            {hasModuleAccess('hrm') && <AddEmployeeDialog />}
           </div>
         </CardContent>
       </Card>

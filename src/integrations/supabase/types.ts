@@ -14,6 +14,147 @@ export type Database = {
   }
   public: {
     Tables: {
+      employees: {
+        Row: {
+          created_at: string
+          department: string | null
+          email: string
+          employee_id: string
+          first_name: string
+          hire_date: string | null
+          id: string
+          last_name: string
+          organization_id: string | null
+          phone: string | null
+          position: string | null
+          salary: number | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          department?: string | null
+          email: string
+          employee_id: string
+          first_name: string
+          hire_date?: string | null
+          id?: string
+          last_name: string
+          organization_id?: string | null
+          phone?: string | null
+          position?: string | null
+          salary?: number | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          department?: string | null
+          email?: string
+          employee_id?: string
+          first_name?: string
+          hire_date?: string | null
+          id?: string
+          last_name?: string
+          organization_id?: string | null
+          phone?: string | null
+          position?: string | null
+          salary?: number | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      inventory_items: {
+        Row: {
+          category: string | null
+          created_at: string
+          current_stock: number
+          id: string
+          item_code: string | null
+          item_name: string
+          minimum_stock: number
+          organization_id: string | null
+          supplier: string | null
+          unit_price: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          current_stock?: number
+          id?: string
+          item_code?: string | null
+          item_name: string
+          minimum_stock?: number
+          organization_id?: string | null
+          supplier?: string | null
+          unit_price?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          current_stock?: number
+          id?: string
+          item_code?: string | null
+          item_name?: string
+          minimum_stock?: number
+          organization_id?: string | null
+          supplier?: string | null
+          unit_price?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      invoices: {
+        Row: {
+          amount: number
+          client_email: string | null
+          client_name: string
+          created_at: string
+          due_date: string | null
+          id: string
+          invoice_number: string
+          organization_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          client_email?: string | null
+          client_name: string
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          invoice_number: string
+          organization_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          client_email?: string | null
+          client_name?: string
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          invoice_number?: string
+          organization_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       organization: {
         Row: {
           created_at: string
@@ -129,6 +270,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      purchase_orders: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          id: string
+          organization_id: string | null
+          po_number: string
+          requested_by: string
+          status: string
+          supplier_email: string | null
+          supplier_name: string
+          total_amount: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          id?: string
+          organization_id?: string | null
+          po_number: string
+          requested_by: string
+          status?: string
+          supplier_email?: string | null
+          supplier_name: string
+          total_amount: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          id?: string
+          organization_id?: string | null
+          po_number?: string
+          requested_by?: string
+          status?: string
+          supplier_email?: string | null
+          supplier_name?: string
+          total_amount?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {
