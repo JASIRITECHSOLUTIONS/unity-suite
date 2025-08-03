@@ -60,22 +60,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchUserData = async (userId: string) => {
     try {
-      console.log('Fetching user data for:', userId);
-      
       // Fetch profile
-      const { data: profileData, error: profileError } = await supabase
+      const { data: profileData } = await supabase
         .from('profiles')
         .select('*')
         .eq('user_id', userId)
         .single();
 
-      console.log('Profile data:', profileData, 'Profile error:', profileError);
-
       if (profileData) {
         setProfile(profileData);
 
         // Fetch user role
-        const { data: roleData, error: roleError } = await supabase
+        const { data: roleData } = await supabase
           .from('user_roles')
           .select('*')
           .eq('user_id', userId)
@@ -84,13 +80,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           .limit(1)
           .single();
 
-        console.log('Role data:', roleData, 'Role error:', roleError);
-
         if (roleData) {
           setUserRole(roleData);
-          console.log('Set user role:', roleData);
-        } else {
-          console.log('No role data found');
         }
       }
     } catch (error) {
